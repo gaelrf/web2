@@ -37,6 +37,19 @@ nav ul li a {
 
 }
 
+section{
+    display: flex;
+    flex-direction: column;
+}
+
+section p{
+    display: none;
+}
+
+section h3:hover +p{
+    display: block;
+}
+
 .seccion1,.seccion2 {
     position: relative;
     display: flex;

@@ -1,11 +1,15 @@
-var confirmarcontraeña = document.getElementById("passwordrepeat").onchange = function checkform(confirmarcontraeña){
-    var contraseña = document.getElementById("password");
-    var registrarse = document.getElementById("registrar")
-    if(contraseña.innerText == confirmarcontraeña.innerText)
-    {
+const contraseña = document.getElementById("password");
+const registrarse = document.getElementById("registrar")
+const confirmarcontraeña = document.getElementById("passwordrepeat")
+
+function checkform() {
+    if (contraseña.value === confirmarcontraeña.value && contraseña.value !== '') {
         registrarse.disabled = false
-    }else{
+    } else {
         registrarse.disabled = true
     }
-    return true;
+    
 }
+
+contraseña.addEventListener('input', checkform)
+confirmarcontraeña.addEventListener('input', checkform)

@@ -1,0 +1,49 @@
+body {
+    display: flex;
+    align-content: center;
+    height: 100vh;
+    justify-content: space-around;
+    background-color: aquamarine;
+}
+body>div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+}
+
+img {
+    width: 60px;
+}
+
+form{
+    border: 1px solid greenyellow;
+    border-radius: 5%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    font-size: 30px;
+    background-color: lemonchiffon;
+
+}
+input{
+    margin: 5px;
+    font-size: 30px;
+}
+button{
+    margin: 5px;
+    font-size: 30px;
+    width: 95%;
+    background-color: cyan;
+}
+
+[type="checkbox"] + label{
+    font-size: 12PX;
+}
+
+#mensaje{
+    width: 95%;
+    font-size: 30px;
+    height: 150px;
+}

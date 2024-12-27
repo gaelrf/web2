@@ -1,0 +1,22 @@
+*{
+    border: 1px solid black;
+}
+
+header{
+    height: 100px;
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+.imguser{
+    height: 100%;
+    border-radius: 50%;
+}
+.clearfix{
+    display: flex;
+    flex-direction: column;
+    justify-content: right;
+}
+

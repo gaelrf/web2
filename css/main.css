@@ -1,6 +1,5 @@
-*{
-    border: 1px solid black;
-}
+
+
 
 header{
     height: 100px;
@@ -9,14 +8,64 @@ header{
     width: 90%;
     justify-content: space-between;
     margin: 0 auto;
+    background-color: aquamarine;
 }
-.imguser{
+#imguser{
     height: 100%;
     border-radius: 50%;
 }
-.clearfix{
+
+#menu{
+    display: none;
+}
+main{
     display: flex;
-    flex-direction: column;
-    justify-content: right;
+    flex-direction: row;
+    height: 80vh;
 }
 
+aside{
+    width: 30%;
+    background-color: lightblue;
+}
+
+aside li{
+    font-size: 40px;
+}
+
+aside ul{
+    list-style: none;
+}
+
+aside i{
+    width: 60px;
+}
+.asidemobil{
+    display: none;
+}
+
+.contenedorprincipal{
+    width: 70%;
+}
+
+
+@media (max-width: 760px) {
+    aside{
+        display: none;
+    }  
+
+    .asidemobil{
+        display: block;
+    }
+
+    #menuoculto{
+        display: none;
+        list-style: none;
+    }
+    .contenedorprincipal{
+        width: 100%;
+    }
+    main{
+        flex-direction: column;
+    }
+}

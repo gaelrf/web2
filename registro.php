@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -10,34 +12,34 @@
 
 <body>
     <div>
-        <a href="index.html">
+        <a href="index.php">
             <img src="img/logo.svg" alt="logo">
         </a>
-        <form action="" method="get">
+        <form action="procesarformulario.php" method="post">
             <label for="nombre">
                 Nombre
             </label>
-            <input type="text" id="nombre" required>
+            <input type="text" id="nombre" name="nombre" required>
             <label for="apellido">
                 Apellidos
             </label>
-            <input type="text" id="apellido" required>
+            <input type="text" id="apellido" name="apellido" required>
             <label for="usuario">
                 Usuario
             </label>
-            <input type="text" id="usuario" required>
+            <input type="text" id="usuario" name="usuario" required>
             <label for="email">
                 Email
             </label>
-            <input type="email" id="email" required>
+            <input type="email" id="email" name="email" required>
             <label for="fecnac">
                 Fecha de Nacimiento
             </label>
-            <input type="date" id="fecnac">
+            <input type="date" id="fecnac" name="fecnac">
             <label for="password">
                 Contraseña
             </label>
-            <input type="password" id="password" required>
+            <input type="password" id="password" name="password" required>
             <label for="password">
                 Repite Contraseña
             </label>

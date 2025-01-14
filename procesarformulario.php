@@ -1,19 +1,35 @@
 <?php
-$mysqli = new mysqli("localhost", "root", "", "web2");
-if ($mysqli->connect_errno) {
-    echo "Fallo al conectar a MySQL: (" . $mysqli->connect_errno . ") " . $mysqli->connect_error;
+
+include("conexiondb.php");
+
+try{
+
+$sql = "insert into usuarios (Nombre, Apellidos, Usuario, Email, Contraseña)
+values (:nombre, :apellido, :usuario, :email, :contrasena)";
+
+$nombre = "Juan";
+$apellido = "Perez";
+$usuario = "juanperez";
+$email = "juanperez@gmail.com";
+$contrasena = "123456";
+
+$prepstm = $conexion->prepare($sql);
+
+$prepstm->bindParam(':nombre', $nombre);
+$prepstm->bindParam(':apellido', $apellido);
+$prepstm->bindParam(':usuario', $usuario);
+$prepstm->bindParam(':email', $email);
+$prepstm->bindParam(':contrasena', $contrasena);
+$prepstm->execute();
+
+echo "Registro insertado";
+
+} catch (PDOException $e) {
+
+    echo "Error: " . $e->getMessage();
+
 }
-echo $mysqli->host_info ;
-echo "jhkj \n";
 
-$sql = "INSERT INTO usuarios (Nombre, Apellidos, Usuario, Email, Fecha_nacimiento, Contraseña) 
-VALUES ('".$_POST['nombre']."', '".$_POST['apellido']."', '".$_POST['usuario']."', '".$_POST['email']."', '".$_POST['fecnac']."', '".$_POST['password']."')";
+$conexion = null;
 
-if ($mysqli->query($sql) === TRUE) {
-  echo "New record created successfully";
-} else {
-  echo "Error: " . $sql . "<br>" . $mysqli->error;
-}
-
-$mysqli->close();
 ?>

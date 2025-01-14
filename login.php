@@ -7,12 +7,13 @@ $stm = $conexion->prepare($sql);
 $stm->bindParam(":usuario", $_POST['usuario']);
 $stm->execute();
 $usuario = $stm->fetch(PDO::FETCH_ASSOC);
-if(password_verify($_POST['password'], $usuario['Contraseña'])){
-var_dump(value: $usuario);
+if($usuario && password_verify($_POST['password'], $usuario['Contraseña'])){
+session_start();
+$_SESSION['usuario'] = $_POST['usuario'];
+header('Location: main.php');
+}else{
+$error = "Usuario o Contraseña incorrectos";
 }
-var_dump(value: $usuario);
-
-exit();
 }
 // session_start();
 // if (isset($_SESSION['usuario'])) {
@@ -47,6 +48,8 @@ exit();
             </label>
             <input type="password" name="password" id="password">
             <button type="submit" id="login">Login</button>
+            <?php if(isset($error)) echo "<p>$error</p>";
+            ?>
             <a href="registro.php">Crear cuenta</a>
         </form>
     </div>

@@ -19,6 +19,8 @@ function menumovil() {
         menuoculto.style.display = 'none'
     } else {
         menuoculto.style.display = 'block'
+        menuoculto.style.zIndex = 1000;
+
 
     }
 }

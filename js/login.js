@@ -5,7 +5,7 @@
 //     var nombre = document.getElementById("usuario").value;
 //     var contraseña = document.getElementById("password").value;
 //     if (nombre == "Administrador" && contraseña == "1234") {
-//         window.location.href = "main.html"
+//         window.location.href = "main.php"
 //     } else {
 //         alert("Usuario o contraseña incorrectos")
 //     }

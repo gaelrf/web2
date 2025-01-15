@@ -1,19 +1,21 @@
 <?php
-if(isset($_POST['usuario'])){
-include("conexiondb.php");
+if (isset($_POST['usuario'])) {
+    include("conexiondb.php");
 
-$sql = "select Contraseña from usuarios where Usuario = :usuario";
-$stm = $conexion->prepare($sql);
-$stm->bindParam(":usuario", $_POST['usuario']);
-$stm->execute();
-$usuario = $stm->fetch(PDO::FETCH_ASSOC);
-if($usuario && password_verify($_POST['password'], $usuario['Contraseña'])){
-session_start();
-$_SESSION['usuario'] = $_POST['usuario'];
-header('Location: main.php');
-}else{
-$error = "Usuario o Contraseña incorrectos";
-}
+    $sql = "select Contraseña, id, foto_perfil from usuarios where Usuario = :usuario";
+    $stm = $conexion->prepare($sql);
+    $stm->bindParam(":usuario", $_POST['usuario']);
+    $stm->execute();
+    $usuario = $stm->fetch(PDO::FETCH_ASSOC);
+    if ($usuario && password_verify($_POST['password'], $usuario['Contraseña'])) {
+        session_start();
+        $_SESSION['usuario'] = $_POST['usuario'];
+        $_SESSION['idusuario'] = $usuario['id'];
+        $_SESSION['foto_usuario'] = $usuario['foto_perfil'];
+        header('Location: main.php');
+    } else {
+        $error = "Usuario o Contraseña incorrectos";
+    }
 }
 // session_start();
 // if (isset($_SESSION['usuario'])) {
@@ -48,7 +50,8 @@ $error = "Usuario o Contraseña incorrectos";
             </label>
             <input type="password" name="password" id="password">
             <button type="submit" id="login">Login</button>
-            <?php if(isset($error)) echo "<p>$error</p>";
+            <?php if (isset($error))
+                echo "<p>$error</p>";
             ?>
             <a href="registro.php">Crear cuenta</a>
         </form>

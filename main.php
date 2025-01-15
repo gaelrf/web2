@@ -1,63 +1,59 @@
 <?php
+
 session_start();
-if(!isset($_SESSION["usuario"])){
-header("Location: index.php");
+if (!isset($_SESSION["usuario"])) {
+    header("Location: index.php");
 }
+
+include"conexiondb.php";
+
+$sql = "select * from incidencias";
+$result = $conexion->query($sql);
+
+include"./partials/cabezera.php";
 
 ?>
 
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Main</title>
-    <link rel="stylesheet" href="css/main.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" /></head>
-
-<body>
-    <header>
-        <img src="img/logo.svg" alt="Logo">
-        <div class="clearfix">
-            <img id="imguser" src="img/usuario.jpg" alt="Usuario">
-            <div id="menu">
-                <ul>
-                    <li><a href="">Datos de usuario</a></li>
-                    <li><a href="cerrarsesion.php">Cerrar sesion</a></li>
-                </ul>
+        <section class="contenedorPrincipal">
+            <h3>Listado incidencias</h3>
+            <div class="incidencias">
+                <form action="nuevaincidencia.php" method="post" id="formIncidencias">
+                    <label for="fecha">Fecha</label>
+                    <input type="date" name="fecha" id="fecha" value="">
+                    <label for="descripcion">Descripcion</label>
+                    <input required type="text" name="descripcion" id="descripcion">
+                    <button action="submit">Enviar</button>
+                </form>
             </div>
-        </div>
-    </header>
-    <main>
-        <aside>
-            <ul>
-                <li><i class="fa-solid fa-cart-shopping"></i> Pedidos</li>
-                <li><i class="fa-solid fa-file-invoice"></i> Facturas</li>
-                <li><i class="fa-solid fa-triangle-exclamation"></i> Incidencias</li>
-                <li><i class="fa-solid fa-calendar-days"></i> Calendario</li>
-                <li><i class="fa-solid fa-file-invoice-dollar"></i> Presupuestos</li>
-            </ul>
-        </aside>
-        <div class="asidemobil">
-            <i class="fa-solid fa-bars" id="menumovil"></i>
-            <ul id="menuoculto">
-                <li><i class="fa-solid fa-cart-shopping"></i> Pedidos</li>
-                <li><i class="fa-solid fa-file-invoice"></i> Facturas</li>
-                <li><i class="fa-solid fa-triangle-exclamation"></i> Incidencias</li>
-                <li><i class="fa-solid fa-calendar-days"></i> Calendario</li>
-                <li><i class="fa-solid fa-file-invoice-dollar"></i> Presupuestos</li>
-            </ul>
-</div>
-        <section class="contenedorprincipal">
+            <div class="lista">
+                <table id="tablaIncidencias">
+                    <thead>
+                        <th>Id</th>
+                        <th>Fecha</th>
+                        <th>Descripcion</th>
+                        <th>Operaciones</th>
+                    </thead>
+                    <tbody id="tbodyIncidencias">
+                        <?php
+                            while ($row = $result->fetch()) {
 
+                                echo"<tr>
+                                <td>" . $row['id'] . "</td>
+                                <td>" . $row['fecha'] . "</td>
+                                <td>" . $row['descripcion'] . "</td>
+                                <td>
+                                    <a href='borrarincidencia.php?idincidencia=".$row['id']."'><i class='fa-solid fa-trash'></i></a>
+                                    <a href='editarincidencia.php?idincidencia=".$row['id']."'><i class='fa-solid fa-pen-to-square'></i></a>
+                                </td>
+                                </tr>";
+
+                            } 
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </section>
-    </main>
-    <footer>
-        <p>Web 2</p>
-    </footer>
-    <script src="js/main.js"></script>
-</body>
-
-</html>
+<?php
+include './partials/footer.php';
+?>
